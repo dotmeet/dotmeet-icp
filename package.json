@@ -1,0 +1,27 @@
+{
+  "name": "dotmeet_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=production node src/index.js",
+    "dev": "NODE_ENV=development nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.8.0",
+    "axios": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "firebase-admin": "^11.5.0",
+    "moment-timezone": "^0.5.43",
+    "node-fetch": "^3.3.2",
+    "node-schedule": "^2.1.1",
+    "puppeteer": "^22.7.1",
+    "telegraf": "^4.12.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}

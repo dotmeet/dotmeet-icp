@@ -1,0 +1,1 @@
+{"canister_methods":{"queries":[{"name":"readEvents","composite":false},{"name":"readEventById","composite":false},{"name":"fetchUpcomingEvents","composite":false}],"updates":[{"name":"createEvent"},{"name":"deleteEvent"}],"callbacks":{}}}

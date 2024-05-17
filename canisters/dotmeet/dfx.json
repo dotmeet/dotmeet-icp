@@ -1,0 +1,20 @@
+{
+  "canisters": {
+    "dotmeet_backend": {
+      "build": "npx azle dotmeet_backend",
+      "candid": "src/dotmeet_backend/dotmeet_backend.did",
+      "gzip": true,
+      "main": "src/dotmeet_backend/src/index.ts",
+      "type": "custom",
+      "wasm": ".azle/dotmeet_backend/dotmeet_backend.wasm"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

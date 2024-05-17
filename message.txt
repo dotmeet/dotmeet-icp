@@ -1,0 +1,29 @@
+`
+  *Photo will replace the above demo photo*
+  /uploadphoto - Upload photo for event
+
+   *Event Name*
+  /editname - Edit event name
+
+  Sub Name (If any)
+  /editsubname - Edit event sub name (Try to keep it short and catchy)
+
+Description
+/editdescription - Add Minmal and catching description regarding the event here if 
+
+*NOTE (If any)*
+/editnote - Add any note or important thing regarding event here
+
+🗓️ **Event Date**
+⏰ Event time
+
+/startDateTime - Edit event start date
+/endDateTime - Edit event end date
+
+📍 *Event Location*
+
+   /floor - Mention which floor or any area in the building the event is happening if any
+   /editlocation -  Edit event location
+   /addmaptoevent - Add map to event
+   /locationnote - If there is any note regarding the location of the event for attendees
+  `
