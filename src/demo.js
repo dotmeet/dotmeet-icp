@@ -57,7 +57,7 @@ const {
   completeTheNewsDetailsFilling,
   confirmNewsSubmission,
   verifyCommunity,
-} = require("./services/bot/actions/verify_actions");
+} = require("./services/bot/actions/canister_actions");
 const {
   cancelPosting,
   deleteEvent,
@@ -153,11 +153,6 @@ const {
 } = require("./services/firestore/general_services");
 
 bot.use(session());
-
-
-
-
-
 
 const stage = new Scenes.Stage([
   // headers

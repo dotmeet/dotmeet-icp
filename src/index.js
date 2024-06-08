@@ -23,7 +23,7 @@ const {
   completeEventSubmission,
   fetchUpcomingEvents,
   fetchAllEvents,
-} = require("./services/bot/actions/verify_actions");
+} = require("./services/bot/actions/canister_actions");
 const {
   cancelPosting,
   deleteEvent,
@@ -90,10 +90,10 @@ bot.action("submit_event", (ctx) => {
     ctx.scene.enter(EVENT_NAME);
   }
 });
-bot.action("all_events", async (ctx) => {
+bot.action("upcoming_events", async (ctx) => {
   if (ctx.chat.type === "private") {
-    console.log("Fetching all events");
-    await fetchAllEvents(ctx);
+    console.log("Fetching upcoming events");
+    await fetchUpcomingEvents(ctx);
   }
 });
 

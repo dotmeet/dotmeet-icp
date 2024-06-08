@@ -68,7 +68,7 @@ const confirmEventSubmission = async (ctx) => {
 
   ctx.scene.enter(START_POSTING);
 };
-const fetchAllEvents = async (ctx) => {
+const fetchUpcomingEvents = async (ctx) => {
   try {
     agent.fetchRootKey().catch((err) => {
       console.warn(
@@ -76,7 +76,7 @@ const fetchAllEvents = async (ctx) => {
       );
       console.error(err);
     });
-    const allEvents = await actor.fetchEvents();
+    const allEvents = await actor.fetchUpcomingEvents();
 
     generateEventDetailsMessage(ctx, allEvents);
   } catch (error) {
@@ -87,5 +87,5 @@ const fetchAllEvents = async (ctx) => {
 module.exports = {
   completeTheEventDetailsFilling,
   confirmEventSubmission,
-  fetchAllEvents,
+  fetchUpcomingEvents,
 };

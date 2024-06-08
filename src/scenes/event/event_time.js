@@ -70,7 +70,10 @@ const {
 // });
 const eventDate = composeWizardScene(
   (ctx) => {
-    generateQuestonsMessage(ctx, "Please enter the date of the event");
+    generateQuestonsMessage(
+      ctx,
+      "Please enter the date of the event in YYYY-MM-DD"
+    );
     return ctx.wizard.next();
   },
   (ctx) => {
@@ -93,7 +96,11 @@ const eventDate = composeWizardScene(
 );
 const eventTiming = composeWizardScene(
   (ctx) => {
-    generateQuestonsMessage(ctx, "Please enter the time of the event");
+    generateQuestonsMessage(
+      ctx,
+      "Please enter the time of the event in HH:MM"
+    );
+    ctx.session.event.eventTime = ctx.message.text;
     return ctx.wizard.next();
   },
   (ctx) => {
@@ -107,8 +114,7 @@ const eventTiming = composeWizardScene(
         !validateMinimumLength(ctx, 2, "Please enter valid time for the event")
       )
         return;
-
-      ctx.session.event.startTime = ctx.message.text;
+      ctx.session.event.eventTiming = ctx.message.text;
       generateEditableEventMessage(ctx);
       return ctx.scene.leave();
     }

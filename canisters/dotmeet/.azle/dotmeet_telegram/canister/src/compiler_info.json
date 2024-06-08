@@ -1,1 +1,1 @@
-{"canister_methods":{"queries":[{"name":"fetchEvents","composite":true}],"updates":[{"name":"handleBotCommand"},{"name":"createEvent"}],"callbacks":{}}}
+{"canister_methods":{"queries":[{"name":"fetchEvents","composite":true},{"name":"fetchUpcomingEvents","composite":true}],"updates":[{"name":"createEvent"}],"callbacks":{}}}

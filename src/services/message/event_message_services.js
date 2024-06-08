@@ -377,8 +377,8 @@ ${escapeHTML(ctx.session.event.registrationLink)} /editregistrationlink
     /eventDate
 
 ⏰ ${
-    ctx.session.event.startTime != "Event Timing"
-      ? escapeHTML(ctx.session.event.startTime)
+    ctx.session.event.eventTiming != "Event Timing"
+      ? escapeHTML(ctx.session.event.eventTiming)
       : "Event Timing"
   }
     /eventTiming

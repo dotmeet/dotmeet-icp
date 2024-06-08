@@ -38,8 +38,8 @@ Hey <b>${ctx.from.first_name}</b>👋🏻
               callback_data: "submit_event",
             },
             {
-              text: "📅 All Events",
-              callback_data: "all_events",
+              text: "📅 Upcoming Events",
+              callback_data: "upcoming_events",
             },
           ],
         ],

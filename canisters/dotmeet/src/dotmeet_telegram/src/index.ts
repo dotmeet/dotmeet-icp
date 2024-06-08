@@ -14,9 +14,9 @@ import {
   Variant,
   Vec,
 } from "azle";
-import TokenCanister from "../../dotmeet_backend/src/index";
+import DotmeetBackend from "../../dotmeet_backend/src/index";
 
-const tokenCanister = TokenCanister(
+const dotmeetBackend = DotmeetBackend(
   Principal.fromText("a4tbr-q4aaa-aaaaa-qaafq-cai")
 );
 const Event = Record({
@@ -45,33 +45,21 @@ const BotResponse = Record({
 });
 type BotResponse = typeof BotResponse.tsType;
 export default Canister({
-  handleBotCommand: update([BotCommand], BotResponse, async (command) => {
-    switch (command.command) {
-      case "getAllEvents":
-        return await getAllEvents();
-      default:
-        return { success: "", error: Some("Unknown command") };
-    }
-  }),
-
   fetchEvents: query([], Vec(Event), async () => {
-    return await ic.call(tokenCanister.readEvents);
+    return await ic.call(dotmeetBackend.readEvents);
+  }),
+  fetchUpcomingEvents: query([], Vec(Event), async () => {
+    return await ic.call(dotmeetBackend.fetchUpcomingEvents);
   }),
   createEvent: update(
     [text, text, text, text, text],
     Result(Event, EventError),
     async (name, description, location, date, time) => {
-      return await ic.call(tokenCanister.createEvent, {
+      return await ic.call(dotmeetBackend.createEvent, {
         args: [name, description, location, date, time],
       });
     }
   ),
 });
 
-async function getAllEvents(): Promise<any> {
-  try {
-    return await ic.call(tokenCanister.readEvents);
-  } catch (error: any) {
-    return { success: "", error: Some(error.toString()) };
-  }
-}
+
