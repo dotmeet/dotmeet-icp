@@ -13,7 +13,6 @@ const {
 
 const { createGoogleCalendarLink } = require("../calender_services");
 
-
 const { escapeHTML } = require("./validate_message_services");
 
 const generateQuestonsMessage = (ctx, message, threshold) => {
@@ -143,12 +142,12 @@ const generateEventConfirmationMessage = (ctx) => {
     },
   });
 };
-const generateEventDetailsMessage = async(ctx,events) => {
+const generateEventDetailsMessage = async (ctx, events) => {
   for (const event of events) {
     const message = populateEventDetailsMessage(event);
-    await ctx.reply(message, { parse_mode: 'HTML' });
+    await ctx.reply(message, { parse_mode: "HTML" });
   }
-}
+};
 const generateEventVerificationMessage = async (event, eventId) => {
   var row = [];
   var keyboard = [];
@@ -404,13 +403,14 @@ const populateEventDetailsMessage = (event) => {
 
 ${escapeHTML(event.description)}
 
+Register: 👉
+${escapeHTML(event.regLink)}  
+
 🗓️ <b>${escapeHTML(event.date)}</b>
 ⏰ <b>${event.time}</b>
 📍 ${escapeHTML(event.location)}
 `;
-
 };
-
 
 const populateFinalMessageDetails = (ctx) => {
   return `

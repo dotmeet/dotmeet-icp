@@ -21,6 +21,7 @@ const Event = Record({
   createdAt: nat64,
   name: text,
   description: text,
+  regLink:text,
   location: text,
   date: text,
   time: text,
@@ -35,15 +36,16 @@ let events = StableBTreeMap<Principal, Event>(1);
 
 export default Canister({
   createEvent: update(
-    [text, text, text, text, text],
+    [text, text, text, text, text, text],
     Result(Event, EventError),
-    (name, description, location, date, time) => {
+    (name, description, regLink, location, date, time) => {
       const id = generateId();
       const event: Event = {
         id,
         createdAt: ic.time(),
         name,
         description,
+        regLink,
         location,
         date,
         time,

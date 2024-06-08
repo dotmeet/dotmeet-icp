@@ -53,6 +53,7 @@ const confirmEventSubmission = async (ctx) => {
     const result = await actor.createEvent(
       ctx.session.event.name.toString(),
       ctx.session.event.description.toString(),
+       ctx.session.event.registrationLink.toString(),
       ctx.session.event.location.toString(),
       ctx.session.event.eventDate.toString(),
       ctx.session.event.eventTiming.toString()

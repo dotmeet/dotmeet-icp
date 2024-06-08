@@ -1,7 +1,7 @@
 service: () -> {
-    createEvent: (text, text, text, text, text) -> (variant {Ok:record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; location:text}; Err:variant {EventDoesNotExist:principal}});
-    deleteEvent: (principal) -> (variant {Ok:record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; location:text}; Err:variant {EventDoesNotExist:principal}});
-    fetchUpcomingEvents: () -> (vec record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; location:text}) query;
-    readEventById: (principal) -> (opt record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; location:text}) query;
-    readEvents: () -> (vec record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; location:text}) query;
+    createEvent: (text, text, text, text, text, text) -> (variant {Ok:record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; regLink:text; location:text}; Err:variant {EventDoesNotExist:principal}});
+    deleteEvent: (principal) -> (variant {Ok:record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; regLink:text; location:text}; Err:variant {EventDoesNotExist:principal}});
+    fetchUpcomingEvents: () -> (vec record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; regLink:text; location:text}) query;
+    readEventById: (principal) -> (opt record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; regLink:text; location:text}) query;
+    readEvents: () -> (vec record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; regLink:text; location:text}) query;
 }

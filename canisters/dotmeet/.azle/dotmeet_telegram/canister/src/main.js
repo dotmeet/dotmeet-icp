@@ -100208,6 +100208,7 @@ var Event2 = Record2({
     createdAt: nat64,
     name: text,
     description: text,
+    regLink: text,
     location: text,
     date: text,
     time: text
@@ -100222,14 +100223,16 @@ var src_default = Canister({
         text,
         text,
         text,
+        text,
         text
-    ], Result(Event2, EventError), (name, description, location, date, time2)=>{
+    ], Result(Event2, EventError), (name, description, regLink, location, date, time2)=>{
         const id2 = generateId();
         const event = {
             id: id2,
             createdAt: ic.time(),
             name,
             description,
+            regLink,
             location,
             date,
             time: time2
@@ -100290,20 +100293,13 @@ var Event3 = Record2({
     createdAt: nat64,
     name: text,
     description: text,
+    regLink: text,
     location: text,
     date: text,
     time: text
 });
 var EventError2 = Variant2({
     EventDoesNotExist: Principal3
-});
-var BotCommand = Record2({
-    command: text,
-    args: Vec2(text)
-});
-var BotResponse = Record2({
-    success: text,
-    error: Opt2(text)
 });
 var src_default2 = Canister({
     fetchEvents: query([], Vec2(Event3), async ()=>{
@@ -100317,12 +100313,14 @@ var src_default2 = Canister({
         text,
         text,
         text,
+        text,
         text
-    ], Result(Event3, EventError2), async (name, description, location, date, time2)=>{
+    ], Result(Event3, EventError2), async (name, description, regLink, location, date, time2)=>{
         return await ic.call(dotmeetBackend.createEvent, {
             args: [
                 name,
                 description,
+                regLink,
                 location,
                 date,
                 time2

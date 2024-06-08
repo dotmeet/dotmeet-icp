@@ -100208,6 +100208,7 @@ var Event2 = Record2({
     createdAt: nat64,
     name: text,
     description: text,
+    regLink: text,
     location: text,
     date: text,
     time: text
@@ -100222,14 +100223,16 @@ var src_default = Canister({
         text,
         text,
         text,
+        text,
         text
-    ], Result(Event2, EventError), (name, description, location, date, time2)=>{
+    ], Result(Event2, EventError), (name, description, regLink, location, date, time2)=>{
         const id2 = generateId();
         const event = {
             id: id2,
             createdAt: ic.time(),
             name,
             description,
+            regLink,
             location,
             date,
             time: time2

@@ -24,6 +24,7 @@ const Event = Record({
   createdAt: nat64,
   name: text,
   description: text,
+  regLink: text,
   location: text,
   date: text,
   time: text,
@@ -33,17 +34,7 @@ const EventError = Variant({
   EventDoesNotExist: Principal,
 });
 type EventError = typeof EventError.tsType;
-const BotCommand = Record({
-  command: text,
-  args: Vec(text),
-});
-type BotCommand = typeof BotCommand.tsType;
 
-const BotResponse = Record({
-  success: text,
-  error: Opt(text),
-});
-type BotResponse = typeof BotResponse.tsType;
 export default Canister({
   fetchEvents: query([], Vec(Event), async () => {
     return await ic.call(dotmeetBackend.readEvents);
@@ -52,14 +43,12 @@ export default Canister({
     return await ic.call(dotmeetBackend.fetchUpcomingEvents);
   }),
   createEvent: update(
-    [text, text, text, text, text],
+    [text, text, text, text, text, text],
     Result(Event, EventError),
-    async (name, description, location, date, time) => {
+    async (name, description, regLink, location, date, time) => {
       return await ic.call(dotmeetBackend.createEvent, {
-        args: [name, description, location, date, time],
+        args: [name, description, regLink, location, date, time],
       });
     }
   ),
 });
-
-

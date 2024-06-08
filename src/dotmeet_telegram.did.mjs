@@ -1,7 +1,7 @@
 export const idlFactory = ({ IDL }) => {
   return IDL.Service({
     createEvent: IDL.Func(
-      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
       [
         IDL.Variant({
           Ok: IDL.Record({
@@ -11,6 +11,7 @@ export const idlFactory = ({ IDL }) => {
             createdAt: IDL.Nat64,
             time: IDL.Text,
             description: IDL.Text,
+            regLink: IDL.Text,
             location: IDL.Text,
           }),
           Err: IDL.Variant({ EventDoesNotExist: IDL.Principal }),
@@ -29,6 +30,7 @@ export const idlFactory = ({ IDL }) => {
             createdAt: IDL.Nat64,
             time: IDL.Text,
             description: IDL.Text,
+            regLink: IDL.Text,
             location: IDL.Text,
           })
         ),
@@ -46,6 +48,7 @@ export const idlFactory = ({ IDL }) => {
             createdAt: IDL.Nat64,
             time: IDL.Text,
             description: IDL.Text,
+            regLink: IDL.Text,
             location: IDL.Text,
           })
         ),
