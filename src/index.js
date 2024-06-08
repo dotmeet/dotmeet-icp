@@ -4,43 +4,29 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-const ps = require("process");
-
-// // log the process memeory usage in every 1 minutes
-// setInterval(() => {
-//   const used = ps.memoryUsage();
-//   for (let key in used) {
-//     console.log(
-//       `${key} ${Math.round((used[key] / 1024 / 1024) * 100) / 100} MB`
-//     );
-//   }
-// }, 60000);
-
 console.log("Running in " + process.env.NODE_ENV);
 
 // services
 const bot = require("./services/bot/bot_services");
-const {
-  findEventChannelLinkByRegion,
-  findNewsChannelLinkByRegion,
-} = require("./services/channel_services");
+const { findEventChannelLinkByRegion } = require("./services/channel_services");
 const { populateEventTemplateToSession } = require("./services/event_services");
 
 const {
   optimizeEvent,
   editEventDetails,
-  editEventPoster,
+
   reuploadEventPoster,
 } = require("./services/bot/actions/edit_actions");
 const {
   confirmEventSubmission,
   completeTheEventDetailsFilling,
   completeEventSubmission,
+  fetchUpcomingEvents,
+  fetchAllEvents,
 } = require("./services/bot/actions/verify_actions");
 const {
   cancelPosting,
   deleteEvent,
-  deleteEventListing,
 } = require("./services/bot/actions/cancel_actions");
 
 // Scenes
@@ -53,39 +39,18 @@ const {
   eventRegLink,
 } = require("./scenes/event/event_header");
 const { eventDate, eventTiming } = require("./scenes/event/event_time");
-const {
-  eventLocation,
-  mapUrl,
-  floor,
-  locationNote,
-} = require("./scenes/event/event_location");
-const {
-  organizertg,
-  communityName,
-  communityTg,
-  websiteUrl,
-} = require("./scenes/event/event_footer");
+const { eventLocation } = require("./scenes/event/event_location");
 
 // utility functions
 const {
-  EVENT_POSTER,
   EVENT_NAME,
-  EVENT_CAPTION,
+
   EVENT_DESCRIPTION,
-  EVENT_NOTE,
+
   EVENT_REG_LINK,
   EVENT_DATE,
   EVENT_TIMING,
   EVENT_LOCATION,
-  EVENT_MAP_URL,
-  EVENT_FLOOR,
-  EVENT_LOCATION_NOTE,
-  EVENT_ORGANIZER,
-  EVENT_COMMUNITY_NAME,
-  EVENT_COMMUNITY_TG,
-  EVENT_SINGLE_DATE,
-  EVENT_MULTIPLE_DATE,
-  EVENT_WEBSITE_URL,
 } = require("./utils/event_scene_types");
 
 const { START_POSTING } = require("./utils/general_scene_types");
@@ -106,9 +71,6 @@ const stage = new Scenes.Stage([
 
   // location info
   eventLocation(EVENT_LOCATION, () => EVENT_LOCATION),
-  mapUrl(EVENT_MAP_URL, () => EVENT_MAP_URL),
-  floor(EVENT_FLOOR, () => EVENT_FLOOR),
-  locationNote(EVENT_LOCATION_NOTE, () => EVENT_LOCATION_NOTE),
 ]);
 
 bot.use(stage.middleware());
@@ -119,16 +81,19 @@ bot.start((ctx) => {
     ctx.scene.enter(START_POSTING);
   }
 });
-// bot.command("calendar", (ctx) => {
-//   generateListEventMessage(ctx);
-// });
 
-bot.command("Dubai", (ctx) => {
+bot.action("submit_event", (ctx) => {
   if (ctx.chat.type === "private") {
     populateEventTemplateToSession(ctx);
     ctx.session.event.region = "Dubai";
     ctx.session.event.channelLink = findEventChannelLinkByRegion("Dubai");
     ctx.scene.enter(EVENT_NAME);
+  }
+});
+bot.action("all_events", async (ctx) => {
+  if (ctx.chat.type === "private") {
+    console.log("Fetching all events");
+    await fetchAllEvents(ctx);
   }
 });
 

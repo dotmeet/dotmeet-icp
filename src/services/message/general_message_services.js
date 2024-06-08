@@ -26,14 +26,24 @@ const generateBotStartMessage = (ctx) => {
     `
 Hey <b>${ctx.from.first_name}</b>👋🏻
     
-🏖️ <b>Choose the place in which the event going to be held:</b>
-<i>Event should be posted to appropriate dotmeet channel, and dotmeet app</i>
-
-<b>/Dubai</b>        
-       
+🏖️ <b>Welcome to Dotmeet</b>       
     `,
     {
       parse_mode: "HTML",
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: "🚀 Submit Event",
+              callback_data: "submit_event",
+            },
+            {
+              text: "📅 All Events",
+              callback_data: "all_events",
+            },
+          ],
+        ],
+      },
     }
   );
 };
