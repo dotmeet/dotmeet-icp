@@ -1,5 +1,4 @@
 module.exports = {
-  EVENT_POSTER: "event_poster",
   EVENT_NAME: "event_name",
   EVENT_CAPTION: "event_caption",
   EVENT_DESCRIPTION: "event_description",

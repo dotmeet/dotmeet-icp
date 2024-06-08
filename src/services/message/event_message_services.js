@@ -83,12 +83,6 @@ const generateEditableEventMessage = (ctx) => {
       inline_keyboard: [
         [
           {
-            text: "🏙️ Edit Poster",
-            callback_data: "edit poster",
-          },
-        ],
-        [
-          {
             text: "✅ Done",
             callback_data: "done",
           },
@@ -122,41 +116,33 @@ const generateEventConfirmationMessage = (ctx) => {
   if (ctx.message) {
     ctx.deleteMessage();
   }
-  ctx.replyWithPhoto(
-    ctx.session.event.poster,
+  ctx.sendMessage({
+    text: populateFinalMessageDetails(ctx),
+    parse_mode: "HTML",
 
-    {
-      caption: populateFinalMessageDetails(ctx),
-      parse_mode: "HTML",
-
-      reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: "🚀 Post to dotmeet",
-              callback_data: "confirm",
-            },
-          ],
-          [
-            {
-              text: "✍🏻 Edit Details",
-              callback_data: "edit_event",
-            },
-            {
-              text: "🌃 Edit Poster",
-              callback_data: "edit poster",
-            },
-          ],
-          [
-            {
-              text: "❌ Cancel",
-              callback_data: "cancel",
-            },
-          ],
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: "🚀 Post to dotmeet",
+            callback_data: "confirm",
+          },
         ],
-      },
-    }
-  );
+        [
+          {
+            text: "✍🏻 Edit Details",
+            callback_data: "edit_event",
+          },
+        ],
+        [
+          {
+            text: "❌ Cancel",
+            callback_data: "cancel",
+          },
+        ],
+      ],
+    },
+  });
 };
 
 const generateEventVerificationMessage = async (event, eventId) => {
@@ -165,11 +151,10 @@ const generateEventVerificationMessage = async (event, eventId) => {
   console.log("event id" + eventId);
   console.log("event" + event.toString());
   console.log("Verify channel id" + getVerifyChnnelIdByRegion(event.region));
-  var message = await bot.telegram.sendPhoto(
+  var message = await bot.telegram.sendMessage(
     getVerifyChnnelIdByRegion(event.region),
-    event.poster,
+    populateVerificationMessage(event),
     {
-      caption: populateVerificationMessage(event),
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: keyboard,
@@ -388,8 +373,8 @@ ${escapeHTML(ctx.session.event.registrationLink)} /editregistrationlink
     /eventDate
 
 ⏰ ${
-    ctx.session.event.eventTiming != "Event Timing"
-      ? escapeHTML(ctx.session.event.eventTiming)
+    ctx.session.event.startTime != "Event Timing"
+      ? escapeHTML(ctx.session.event.startTime)
       : "Event Timing"
   }
     /eventTiming
@@ -405,7 +390,6 @@ ${escapeHTML(ctx.session.event.registrationLink)} /editregistrationlink
       : ""
   }
     /eventLocaltion 
-    /mapUrlToEvent  
 
 
       `;

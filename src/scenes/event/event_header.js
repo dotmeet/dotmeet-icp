@@ -28,33 +28,6 @@ const {
 
 // utils
 
-const eventPoster = composeWizardScene(
-  (ctx) => {
-    generateQuestonsMessage(ctx, "Please send the poster of the event", 0);
-    return ctx.wizard.next();
-  },
-  async (ctx) => {
-    if (ctx.callbackQuery) {
-      if (ctx.callbackQuery.data == "cancel question") {
-        cancelPosting(ctx);
-        return;
-      }
-    } else {
-      if (!ctx.message.photo) {
-        ctx.reply("Please send a valid poster");
-        return;
-      }
-      // var file id of the uploaded file
-      const fileId = ctx.message.photo[ctx.message.photo.length - 1].file_id;
-      ctx.session.event.poster = fileId;
-
-      generateEditEventPhotoMessage(ctx);
-
-      return ctx.scene.leave();
-    }
-  }
-);
-
 const eventName = composeWizardScene(
   (ctx) => {
     generateQuestonsMessage(
@@ -92,46 +65,6 @@ const eventName = composeWizardScene(
   }
 );
 
-const eventCaption = composeWizardScene(
-  (ctx) => {
-    generateQuestonsMessage(
-      ctx,
-      "Please enter the caption of the event",
-      eventCaptionThreshold
-    );
-    return ctx.wizard.next();
-  },
-  (ctx) => {
-    if (ctx.callbackQuery) {
-      if (ctx.callbackQuery.data == "cancel question") {
-        cancelEventQuestion(ctx);
-        return;
-      }
-    } else {
-      // validation example
-      if (
-        !validateMinimumLength(
-          ctx,
-          2,
-          "Please enter valid caption for the event"
-        )
-      )
-        return;
-
-      if (
-        !validateMaximumLength(
-          ctx,
-          eventCaptionThreshold,
-          `Please enter caption less than ${eventCaptionThreshold} characters`
-        )
-      )
-        return;
-      ctx.session.event.caption = ctx.message.text;
-      generateEditableEventMessage(ctx);
-      return ctx.scene.leave();
-    }
-  }
-);
 const eventDescription = composeWizardScene(
   (ctx) => {
     generateQuestonsMessage(
@@ -167,42 +100,6 @@ const eventDescription = composeWizardScene(
         return;
 
       ctx.session.event.description = ctx.message.text;
-      generateEditableEventMessage(ctx);
-      return ctx.scene.leave();
-    }
-  }
-);
-
-const eventNote = composeWizardScene(
-  (ctx) => {
-    generateQuestonsMessage(
-      ctx,
-      "Please enter extra notes regarding the event for the attendees to know",
-      eventNoteThreshold
-    );
-    return ctx.wizard.next();
-  },
-  (ctx) => {
-    if (ctx.callbackQuery) {
-      if (ctx.callbackQuery.data == "cancel question") {
-        cancelEventQuestion(ctx);
-        return;
-      }
-    } else {
-      if (
-        !validateMinimumLength(ctx, 2, "Please enter valid note for the event")
-      )
-        return;
-      if (
-        !validateMaximumLength(
-          ctx,
-          eventNoteThreshold,
-          `Please enter note less than ${eventNoteThreshold} characters`
-        )
-      )
-        return;
-
-      ctx.session.event.note = ctx.message.text;
       generateEditableEventMessage(ctx);
       return ctx.scene.leave();
     }
@@ -249,10 +146,9 @@ const eventRegLink = composeWizardScene(
 );
 
 module.exports = {
-  eventPoster,
   eventName,
-  eventCaption,
+
   eventDescription,
-  eventNote,
+
   eventRegLink,
 };

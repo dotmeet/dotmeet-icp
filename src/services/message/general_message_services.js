@@ -5,8 +5,6 @@ const generateQuestonsMessage = (ctx, message, threshold) => {
   ctx.reply(
     `
       <b>${message}</b>,
-      ${threshold != 0 ? `<i>(Should be less than ${threshold})</i>` : ""}
-  
       `,
     {
       parse_mode: "HTML",

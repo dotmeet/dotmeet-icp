@@ -6,31 +6,7 @@ const {
 
 const { eventTemplate } = require("../constants/events/event_datas");
 const { getTimezoneValue } = require("./date_services");
-const validateEventSubmission = (uploadedEvent) => {
-  const errors = [];
-  const { name, description, eventDate, eventTiming, location, mapUrl } =
-    uploadedEvent;
 
-  if (name == eventTemplate.name) {
-    errors.push("Please enter an event name");
-  }
-  if (description == eventTemplate.description) {
-    errors.push("Please enter an event description");
-  }
-  if (eventDate == eventTemplate.eventDate) {
-    errors.push("Please enter an event date");
-  }
-  if (eventTiming == eventTemplate.eventTiming) {
-    errors.push("Please enter an event timing");
-  }
-  if (location == eventTemplate.location) {
-    errors.push("Please enter an event location");
-  }
-  if (mapUrl == eventTemplate.mapUrl) {
-    errors.push("Please enter an event mapUrl");
-  }
-  return errors;
-};
 
 const populateEventTemplateToSession = (ctx) => {
   ctx.session.event = Object.assign({}, eventTemplate);
@@ -171,14 +147,8 @@ const prepareForStoringEventIntoDB = async (uploadedEvent) => {
   if (websiteUrl && websiteUrl !== eventTemplate.websiteUrl) {
     eventToStoreinDB.websiteUrl = websiteUrl;
   }
-  var updatedEventId = "";
-  if (id && id !== eventTemplate.id) {
-    updatedEventId = updateEvent(id, eventToStoreinDB);
-  } else {
-    updatedEventId = await createEvent(eventToStoreinDB);
-  }
 
-  return { updatedEventId, eventToStoreinDB };
+  return { eventToStoreinDB };
 };
 
 const fetchFromDB = async (id) => {
@@ -187,7 +157,7 @@ const fetchFromDB = async (id) => {
 };
 
 module.exports = {
-  validateEventSubmission,
+  
   prepareForStoringEventIntoDB,
   populateEventTemplateToSession,
   fetchFromDB,

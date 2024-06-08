@@ -1,0 +1,5 @@
+service: () -> {
+    createEvent: (text, text, text, text, text) -> (variant {Ok:record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; location:text}; Err:variant {EventDoesNotExist:principal}});
+    fetchEvents: () -> (vec record {id:principal; date:text; name:text; createdAt:nat64; time:text; description:text; location:text}) query;
+    handleBotCommand: (record {args:vec text; command:text}) -> (record {error:opt text; success:text});
+}

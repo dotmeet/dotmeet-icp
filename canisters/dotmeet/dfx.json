@@ -7,6 +7,14 @@
       "main": "src/dotmeet_backend/src/index.ts",
       "type": "custom",
       "wasm": ".azle/dotmeet_backend/dotmeet_backend.wasm"
+    },
+    "dotmeet_telegram": {
+      "build": "npx azle dotmeet_telegram",
+      "candid": "src/dotmeet_telegram/dotmeet_telegram.did",
+      "gzip": true,
+      "main": "src/dotmeet_telegram/src/index.ts",
+      "type": "custom",
+      "wasm": ".azle/dotmeet_telegram/dotmeet_telegram.wasm"
     }
   },
   "defaults": {
