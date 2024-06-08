@@ -12,7 +12,7 @@ const agent = new HttpAgent({ host: "http://127.0.0.1:4943" });
 
 let actor;
 // Use dynamic import to import the idlFactory
-const idlFactoryPromise = import("../../../dotmeet_telegram.did.mjs").then(
+const idlFactoryPromise = import("../../../constants/dotmeet_telegram.did.mjs").then(
   (module) => module.idlFactory
 );
 
