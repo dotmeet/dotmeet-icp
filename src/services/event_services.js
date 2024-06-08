@@ -1,11 +1,7 @@
-const {
-  createEvent,
-  getEventById,
-  updateEvent,
-} = require("./firestore/event_services");
+
 
 const { eventTemplate } = require("../constants/events/event_datas");
-const { getTimezoneValue } = require("./date_services");
+
 
 
 const populateEventTemplateToSession = (ctx) => {

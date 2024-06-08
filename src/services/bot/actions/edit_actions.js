@@ -3,7 +3,7 @@ const {
   START_POSTING,
   EVENT_POSTER,
 } = require("../../../utils/event_scene_types");
-const { deleteEventById } = require("../../firestore/event_services");
+
 const {
   generateEditableEventMessage,
 } = require("../../message/event_message_services");

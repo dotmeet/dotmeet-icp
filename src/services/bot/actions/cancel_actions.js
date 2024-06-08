@@ -1,9 +1,6 @@
 const bot = require("../bot_services");
 const { START_POSTING } = require("../../../utils/general_scene_types");
-const {
-  deleteEventById,
-  deleteEventListingById,
-} = require("../../firestore/event_services");
+
 const {
   generateEditableEventMessage,
 } = require("../../message/event_message_services");

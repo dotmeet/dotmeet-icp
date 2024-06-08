@@ -16,11 +16,7 @@ const ps = require("process");
 //   }
 // }, 60000);
 
-
-
 console.log("Running in " + process.env.NODE_ENV);
-
-
 
 // services
 const bot = require("./services/bot/bot_services");
@@ -29,27 +25,17 @@ const {
   findNewsChannelLinkByRegion,
 } = require("./services/channel_services");
 const { populateEventTemplateToSession } = require("./services/event_services");
-const {
-  sendNewEventMessage,
-  sendWelcomeTestMessage,
-} = require("./services/firebase_messaging_services");
+
 const {
   optimizeEvent,
   editEventDetails,
   editEventPoster,
   reuploadEventPoster,
-  editNewsPoster,
-  reuploadNewsPoster,
-  editNewsDetails,
 } = require("./services/bot/actions/edit_actions");
 const {
-  completeNewsSubmission,
   confirmEventSubmission,
   completeTheEventDetailsFilling,
   completeEventSubmission,
-  completeTheNewsDetailsFilling,
-  confirmNewsSubmission,
-  verifyCommunity,
 } = require("./services/bot/actions/verify_actions");
 const {
   cancelPosting,
@@ -61,17 +47,12 @@ const {
 const { startPosting } = require("./scenes/general");
 const {
   eventName,
-  eventCaption,
+
   eventDescription,
-  eventNote,
+
   eventRegLink,
-  eventPoster,
 } = require("./scenes/event/event_header");
-const {
-  eventDate,
-  eventTiming,
- 
-} = require("./scenes/event/event_time");
+const { eventDate, eventTiming } = require("./scenes/event/event_time");
 const {
   eventLocation,
   mapUrl,
@@ -108,12 +89,6 @@ const {
 } = require("./utils/event_scene_types");
 
 const { START_POSTING } = require("./utils/general_scene_types");
-
-
-
-
-
-
 
 bot.use(session());
 

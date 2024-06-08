@@ -13,9 +13,8 @@ const {
 
 const { createGoogleCalendarLink } = require("../calender_services");
 
-const { updateEvent } = require("../firestore/event_services");
+
 const { escapeHTML } = require("./validate_message_services");
-const { sendNewEventMessage } = require("../firebase_messaging_services");
 
 const generateQuestonsMessage = (ctx, message, threshold) => {
   if (ctx.message) {
