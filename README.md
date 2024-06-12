@@ -1,6 +1,5 @@
 # Dotmeet
 Telegram based event management app for web3 communities. 
-- How does it look like in action? Have any screenshots, videos etc.?
 
 
 ## Introduction
