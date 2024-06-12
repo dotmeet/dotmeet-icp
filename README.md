@@ -18,7 +18,7 @@ Step-by-step guide to get a copy of the project up and running locally for devel
 1. Deploying canisters
    
 ```bash
-$ git clone <GitHub repo>
+$ git clone https://github.com/dotmeet/dotmeet-icp
 $ cd canisters/dotmeet/
 $ npm install
 $ dfx start --background
