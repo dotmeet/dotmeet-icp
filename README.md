@@ -19,7 +19,7 @@ Step-by-step guide to get a copy of the project up and running locally for devel
    
 ```bash
 $ git clone https://github.com/dotmeet/dotmeet-icp
-$ cd canisters/dotmeet/
+$ cd dotmeet-icp/canisters/dotmeet/
 $ npm install
 $ dfx start --background
 $ dfx deploy
